@@ -11,15 +11,17 @@ Hash functions such as SHA-2 or MD5 will hash contents of these two documents in
 By contrast, Simhash will hash contents of A and B to similar hash values. The Hamming distance between simhash(A) and simhash(B) would be small.
 
 # Usage
-    var sjs = require('simhash-js');
-    var simhash = new sjs.SimHash();
-    var x = simhash.hash("This is a test of the Emergency Blogcast System");
-    var y = simhash.hash("This is a second test of the Emergency Blogcast System");
+    import { SimHash, Comparator } from 'simhash-js';
 
-    var s = sjs.Comparator.similarity(x, y); 
+    const simhasher = new SimHash();
+    const simhash1 = simhasher.hash("This is a test of the Emergency Blogcast System");
+    const simhash2 = simhasher.hash("This is a second test of the Emergency Blogcast System");
+
+    const similarity = Comparator.similarity(simhash1, simhash2); 
 
 
 # To Do
+* Replace tokenizer
 * Implement an efficient priority queue
 * Accept a list of stop words to be removed from input prior to calculating hash
 
