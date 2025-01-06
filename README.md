@@ -2,6 +2,9 @@
 
 A Javascript implementation of Charikar's hash for identification of similar documents. 
 
+## ⚠️ Warning: *Not fit for production*
+
+This code has critical errors. See issue [#1](https://github.com/eggdropsoap/simhash-js-esm/issues/1).
 
 ## What is Simhash?
 Consider two documents A and B that differ in just a single byte. 
@@ -11,14 +14,16 @@ Hash functions such as SHA-2 or MD5 will hash contents of these two documents in
 By contrast, Simhash will hash contents of A and B to similar hash values. The Hamming distance between simhash(A) and simhash(B) would be small.
 
 # Usage
-    import { SimHash, Comparator } from 'simhash-js';
 
-    const simhasher = new SimHash();
-    const simhash1 = simhasher.hash("This is a test of the Emergency Blogcast System");
-    const simhash2 = simhasher.hash("This is a second test of the Emergency Blogcast System");
+````js
+import { SimHash, Comparator } from 'simhash-js';
 
-    const similarity = Comparator.similarity(simhash1, simhash2); 
+const simhasher = new SimHash();
+const simhash1 = simhasher.hash("This is a test of the Emergency Blogcast System");
+const simhash2 = simhasher.hash("This is a second test of the Emergency Blogcast System");
 
+const similarity = Comparator.similarity(simhash1, simhash2); 
+````
 
 # To Do
 * Replace tokenizer
