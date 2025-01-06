@@ -1,8 +1,14 @@
 {
-    "name": "simhash-js",
-    "version": "1.0.0",
+    "name": "simhash-js-esm",
+    "version": "1.1.0",
     "description": "A Javascript implementation of Charikar's hash for identification of similar documents.",
-    "main": "index.js",
+    "type": "module",
+    "exports": "./index.js",
+    "files": [
+        "Comparator.js",
+        "Jenkins.js",
+        "SimHash.js"
+    ],
     "directories": {
         "test": "test"
     },
@@ -11,15 +17,16 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/xblanc33/simhash-js.git"
+        "url": "git+https://github.com/eggdropsoap/simhash-js-esm.git"
     },
-    "author": "Vijay Kandy, Xavier Blanc",
+    "author": "Vijay Kandy, Xavier Blanc, eggdropsoap",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/xblanc33/simhash-js/issues"
+        "url": "https://github.com/eggdropsoap/simhash-js-esm/issues"
     },
-    "homepage": "https://github.com/xblanc33/simhash-js#readme",
+    "homepage": "https://github.com/eggdropsoap/simhash-js-esm#readme",
     "devDependencies": {
         "mocha": "^3.4.2"
-    }
+    },
+    "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }

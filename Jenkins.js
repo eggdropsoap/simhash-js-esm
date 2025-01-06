@@ -3,7 +3,7 @@
  *
  * See https://github.com/vkandy/jenkins-hash-js
  */
-class Jenkins {
+export class Jenkins {
 
     constructor() {
         /**
@@ -25,7 +25,7 @@ class Jenkins {
      * Computes and returns 32-bit hash of given message.
      */
     hash32(msg) {
-        var h = lookup3(msg, this.pc, this.pb);
+        const h = lookup3(msg, this.pc, this.pb);
         return (h.c).toString(16);
     }
 
@@ -33,7 +33,7 @@ class Jenkins {
      * Computes and returns 32-bit hash of given message.
      */
     hash64(msg) {
-        var h = lookup3(msg, this.pc, this.pb);
+        const h = lookup3(msg, this.pc, this.pb);
         return (h.b).toString(16) + (h.c).toString(16);
     }
 
@@ -49,13 +49,13 @@ class Jenkins {
  * Implementation of lookup3 algorithm.
  */
 function lookup3(k, pc, pb) {
-    var length = k.length;
-    var a, b, c;
+    let length = k.length;
+    let a, b, c;
 
     a = b = c = 0xdeadbeef + length + pc;
     c += pb;
 
-    var offset = 0;
+    let offset = 0;
     while (length > 12) {
         a += k.charCodeAt(offset + 0);
         a += k.charCodeAt(offset + 1) << 8;
@@ -72,7 +72,7 @@ function lookup3(k, pc, pb) {
         c += k.charCodeAt(offset + 10) << 16;
         c += k.charCodeAt(offset + 11) << 24;
 
-        mixed = mix(a, b, c);
+        const mixed = mix(a, b, c);
         a = mixed.a;
         b = mixed.b;
         c = mixed.c;
@@ -115,7 +115,7 @@ function lookup3(k, pc, pb) {
     }
 
     // Final mixing of three 32-bit values in to c
-    mixed = finalMix(a, b, c)
+    const mixed = finalMix(a, b, c)
     a = mixed.a;
     b = mixed.b;
     c = mixed.c;
@@ -176,5 +176,4 @@ function rot(x, k) {
     return (((x) << (k)) | ((x) >> (32 - (k))));
 };
 
-
-module.exports.Jenkins = Jenkins;
+export default Jenkins;

@@ -1,8 +1,8 @@
-Jenkins = require('./Jenkins.js').Jenkins;
-SimHash = require('./SimHash.js').SimHash;
-Comparator = require('./Comparator.js').Comparator;
+import Jenkins from './Jenkins.js';
+import SimHash from './SimHash.js';
+import Comparator from './Comparator.js';
 
 
-module.exports.Jenkins = Jenkins;
-module.exports.SimHash = SimHash;
-module.exports.Comparator = Comparator;
+export const Jenkins = Jenkins;
+export const SimHash = SimHash;
+export const Comparator = Comparator;

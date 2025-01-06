@@ -1,10 +1,10 @@
-var assert = require('assert');
-var SimHash = require('../SimHash.js').SimHash;
+import assert from 'assert';
+import SimHash from '../SimHash.js';
 
 describe('SimHash', function() {
     describe('#do()', function() {
         it('generates a simhash', function() {
-            var simhash = new SimHash();
+            const simhash = new SimHash();
             simhash.hash('test message');
         });
     });

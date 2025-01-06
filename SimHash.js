@@ -2,19 +2,19 @@
  * Simhash class. Creates a 32-bit simhash.
  *
  * // Usage: 
- * var hash = Simhash.of("This is a test");
+ * const hash = Simhash.of("This is a test");
  *
  * // Override default values
- * var simhash = new Simhash();
- * var hash = simhash.of("This is a test", {
+ * const simhash = new Simhash();
+ * const hash = simhash.of("This is a test", {
  *      kshingles: 2,
  *      maxFeatures: 32    
  * });
  */
 
-var Jenkins = require('./Jenkins.js').Jenkins;
+import { Jenkins } from './Jenkins.js';
 
-class SimHash {
+export class SimHash {
 
     constructor(options) {
         /**
@@ -37,13 +37,13 @@ class SimHash {
      * Driver function.
      */
     hash(input) {
-        var tokens = tokenize.call(this,input);
-        var shingles = [];
-        var jenkins = new Jenkins();
-        for (var i in tokens) {
+        const tokens = tokenize.call(this,input);
+        const shingles = [];
+        const jenkins = new Jenkins();
+        for (let i in tokens) {
             shingles.push(jenkins.hash32(tokens[i]));
         }
-        var simhash = combineShingles.call(this,shingles);
+        let simhash = combineShingles.call(this,shingles);
         simhash >>>= 0;
         return simhash;
     };
@@ -66,12 +66,12 @@ function combineShingles(shingles) {
     shingles.sort(hashComparator);
     if (shingles.length > this.maxFeatures) shingles = shingles.splice(this.maxFeatures);
 
-    var simhash = 0x0;
-    var mask = 0x1;
-    for (var pos = 0; pos < 32; pos++) {
-        var weight = 0;
-        for (var i in shingles) {
-            shingle = parseInt(shingles[i], 16);
+    let simhash = 0x0;
+    let mask = 0x1;
+    for (let pos = 0; pos < 32; pos++) {
+        let weight = 0;
+        for (let i in shingles) {
+            const shingle = parseInt(shingles[i], 16);
             weight += !(~shingle & mask) == 1 ? 1 : -1;
         }
         if (weight > 0) simhash |= mask;
@@ -85,13 +85,13 @@ function combineShingles(shingles) {
  * Tokenizes input into 'kshingles' number of tokens.
  */
 function tokenize(original) {
-    var size = original.length;
+    const size = original.length;
     if (size <= this.kshingles) {
         return [original.substr(0)];
     }
 
-    var shingles = [];
-    for (var i = 0; i < size; i = i + this.kshingles) {
+    const shingles = [];
+    for (let i = 0; i < size; i = i + this.kshingles) {
         shingles.push(i + this.kshingles < size ? original.slice(i, i + this.kshingles) : original.slice(i));
     }
     return shingles;
@@ -101,8 +101,8 @@ function tokenize(original) {
  * Calculates binary hamming distance of two base 16 integers.
  */
 function hammingDistanceSlow(x, y) {
-    var distance = 0;
-    var val = parseInt(x, 16) ^ parseInt(y, 16);
+    let distance = 0;
+    let val = parseInt(x, 16) ^ parseInt(y, 16);
     while (val) {
         ++distance;
         val &= val - 1;
@@ -118,4 +118,4 @@ function hashComparator(a, b) {
     return a < b ? -1 : (a > b ? 1 : 0);
 };
 
-module.exports.SimHash = SimHash;
+export default SimHash;
