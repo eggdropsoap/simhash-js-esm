@@ -45,7 +45,7 @@ export class SimHash {
         }
         let simhash = combineShingles.call(this,shingles);
         simhash >>>= 0;
-        return simhash;
+        return simhash.toString(16);
     };
 
 };
