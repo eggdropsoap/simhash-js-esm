@@ -41,7 +41,7 @@ export class SimHash {
         const shingles = [];
         const jenkins = new Jenkins();
         for (let i in tokens) {
-            shingles.push(jenkins.hash64(tokens[i]));
+            shingles.push(jenkins.hash32(tokens[i]));
         }
         let simhash = combineShingles.call(this,shingles);
         simhash >>>= 0;
@@ -64,6 +64,7 @@ function combineShingles(shingles) {
     if (shingles.length == 1) return shingles[0];
 
     shingles.sort(hashComparator);
+    // console.log(shingles);
     if (shingles.length > this.maxFeatures) shingles = shingles.splice(this.maxFeatures);
 
     let simhash = 0x0;
